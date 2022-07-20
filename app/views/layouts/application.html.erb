@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <% if user_signed_in? %>
+      <a href="#" class="navbar-brand"><%= current_user.email %></a>
+    <% else %>
+    <a href="#" class="navbar-brand">User</a>
+    <% end %>
+
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <%= link_to "home",root_path ,class:"nav-link" ,onclick:"functionName()"%>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "My Order",orders_index_path ,class:"nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Order History ",order_history_orders_path ,class:"nav-link"%>
+        </li>
+      </ul>
+
+      <a href="/carts" class = "btn btn-primary">Cart
+      <span class="badge bg-danger"><%= @cart_count if @cart_count > 0 %></span>
+    </a>
+        &nbsp;
+        <% if user_signed_in? %>
+          <%= link_to 'Sign Out',destroy_user_session_path, data:{turbo_method: :delete},class:"btn btn-primary" %>
+        <% else %>
+          <%= link_to 'Sign In',new_user_session_path, class:"btn btn-primary"%>
+        <% end %>
+
+    </div>
+  </div>
+</nav>
+    <div class="container">
+      <br>
+      <p class="alert"><%= alert %></p>
+      <% if flash[:notice].present? %>
+        <p class="notice alert alert-warning"><%= flash[:notice] %></p>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

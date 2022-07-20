@@ -1,0 +1,37 @@
+
+
+<h3>My Cart</h3>
+
+
+  <div class="container ">
+    <div class="row ">
+      <% @carts.each do |x|%>
+
+          <div class="col-3 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title"><%= x["name"]%></h4>
+                <p class="card-text">Price/Kg : <%= x["price_per_kg"]%></p>
+                <p class="card-text">Weight : <%= x["pack_weight"] %><%= x["weight_type"] %></p>
+                <p class="card-text">Quantity : <%= x["quantity"]%></p>
+                <p class="card-text">Total Price : <%= total_price(x["pack_weight"],x["weight_type"],x["quantity"],x["price_per_kg"]) %></p>
+                <%= link_to "edit",edit_cart_item_path(x["id"]) ,class:"btn btn-warning card-link"%>
+                <%= link_to "Delete", cart_item_path(x["id"]), data: {
+                              turbo_method: :delete,
+                              turbo_confirm: "Are you sure?"
+                            } ,class:"btn btn-warning card-link"%>
+
+
+              </div>
+            </div>
+          </div>
+
+      <% end %>
+    </div>
+    <br>
+    <% if @cart_count >0 %>
+    <div class="">
+      <%= link_to "checkout",checkout_carts_path ,class:"btn btn-primary"%>
+    </div>
+    <% end %>
+  </div>

@@ -1,0 +1,64 @@
+
+<h3>Order Details</h3>
+  <table class="table">
+    <tr>
+      <th>item</th>
+      <th>Weight</th>
+      <th>quantity</th>
+      <th>Price per Kg</th>
+      <th>total price</th>
+    </tr>
+
+    <% @order_derails.each do |x|%>
+      <tr>
+      <td><%= x["name"]%></td>
+      <td><%= x["pack_weight"] %><%= x["weight_type"] %></td>
+      <td><%= x["quantity"]%></td>
+      <td><%= x["price_per_kg"]%></td>
+      <td><%= total_price(x["pack_weight"],x["weight_type"],x["quantity"],x["price_per_kg"]) %></td>
+
+
+      </tr>
+
+    <% end %>
+
+    <tr>
+      <td colspan="4"></td>
+
+      <th><%= @order.total_amount%></th>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <th>Tax(10%)</th>
+      <td><%= @order.tax %></td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <th>Total to pay</th>
+      <th><%= @order.total_to_pay %></th>
+    </tr>
+    <tr>
+      <td colspan="4"></td>
+      <th><% if @order.status == "active"%>
+      <%= link_to "Cancel",cancel_order_path(@order),  data: {
+                    turbo_method: :cancel,
+                    turbo_confirm: "Are you sure?"
+                  } ,class:"btn btn-warning card-link"%>
+
+      <% end %>
+      <% if @order.status == "cancelled"%>
+      <a class ="btn btn-danger card-link">cancelled</a>
+      <% end %>
+      <% if @order.status == "delivered"%>
+      <a class ="btn btn-success card-link">delivered</a>
+      <% end %></th>
+    </tr>
+
+
+  </table>
+  <% if @order.status == "cancelled"%>
+  <p><%= link_to "back",orders_index_path ,class:"btn btn-primary"%></p>
+  <% end %>
+  <% if @order.status == "delivered"%>
+  <p><%= link_to "back",order_history_orders_path ,class:"btn btn-primary"%></p>
+  <% end %>

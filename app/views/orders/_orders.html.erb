@@ -1,0 +1,34 @@
+
+<div class="container ">
+  <div class="row ">
+    <% a=1 %>
+    <% order.each do |x| %>
+        <div class="col-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Order -<%= a %>:(<%= x.created_at.strftime('%d-%B-%Y')%>)</h4>
+              <p class="card-text">Total amoint : <%= x.total_amount%></p>
+              <p class="card-text">Tax : <%= x.tax%></p>
+              <p class="card-text">Total to Pay : <%= x.total_to_pay%></p>
+              <%= link_to "Show Details",order_path(x),class:"btn btn-warning card-link"%>
+              <% if x.status == "active"%>
+              <%= link_to "Cancel",cancel_order_path(x),  data: {
+                            turbo_method: :cancel,
+                            turbo_confirm: "Are you sure?"
+                          } ,class:"btn btn-warning card-link"%>
+
+              <% end %>
+              <% if x.status == "cancelled"%>
+              <a class ="btn btn-danger card-link">cancelled</a>
+              <% end %>
+              <% if x.status == "delivered"%>
+              <a class ="btn btn-success card-link">delivered</a>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% a+=1 %>
+    <% end %>
+  </div>
+
+</div>

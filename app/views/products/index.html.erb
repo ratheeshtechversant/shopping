@@ -1,0 +1,19 @@
+<h1>Poduct details</h1>
+<div class="container ">
+  <div class="row">
+    <% @product.each do |p|%>
+
+        <div class="col-3">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h4 class="card-title"><%= p.name%></h4>
+              <p class="card-text">Price/Kg : <%= p.price_per_kg%> &#8377</p>
+              <%= link_to "Add to Cart", addcart_product_path(p),class:"btn btn-warning card-link"%>
+              <%= link_to "Buy Now",buynow_product_path(p), class:"btn btn-warning card-link"%>
+            </div>
+          </div>
+        </div>
+
+    <% end %>
+  </div>
+</div>

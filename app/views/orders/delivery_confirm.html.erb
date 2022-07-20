@@ -1,0 +1,15 @@
+<h4>Confirm Delivery</h4>
+<table class='table'>
+  <tr>
+    <th>user id</th>
+    <th>order id</th>
+    <th></th>
+  </tr>
+  <% @order.each do |x|%>
+  <tr>
+    <td><%= x.user_id %></td>
+    <td><%= x.id %></td>
+    <td><%= link_to 'Deliverd',confirm_del_order_path(x)%></td>
+  </tr>
+  <% end %>
+</table>

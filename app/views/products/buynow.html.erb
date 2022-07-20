@@ -1,0 +1,41 @@
+<h2><%= @product.name%></h2>
+<%= form_with model: [@product],url: orders_path, method: :post do |form| %>
+<p>
+  <%= form.label :name %><br>
+
+  <input type="text" value="<%= @product.name %>" name="product[name]" id="product_name" readonly>
+</p>
+
+<p>
+  <%= form.label :price_per_kg %><br>
+  <input type="number" value="<%= @product.price_per_kg %>" name="product[price_per_kg]" id="product_price_per_kg" readonly>
+</p>
+
+<p>
+  <% if !@weight.empty? %>
+
+    <select name="product[product_pack_id]" id="product_product_pack_id">
+      <% @weight.each do |w|%>
+          <option value="<%= w.id %>"><%= w.pack_weight %> <%= w.weight_type%></option>
+      <% end %>
+    </select>
+    <% end %>
+    </p>
+<p>
+  <%= form.label :quantity %><br>
+  <%= form.number_field :quantity,value: 1  %>
+</p>
+<p>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+</p>
+<p>
+  <%= form.hidden_field :product_id, value: @product.id %>
+</p>
+<p>
+
+  <%= form.hidden_field :status, value: "active" %>
+</p>
+<p>
+  <%= form.submit "Buy Now" ,class:"btn btn-primary"%>
+</p>
+<% end %>
