@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'orders/index'
   root 'products#index'
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :products do
     member do
       get 'buynow'
