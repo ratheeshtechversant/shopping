@@ -91,11 +91,11 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.default_url_options = { host: 'https://shopping-app-sample.herokuapp.com' ,PORT:-5000 }
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 560db6fb1cbd5e49d5b6b9b1a27d2715974bc812
+# <<<<<<< HEAD
+#
+# =======
+#
+# >>>>>>> 560db6fb1cbd5e49d5b6b9b1a27d2715974bc812
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
   address:              'smtp.gmail.com',
@@ -108,8 +108,8 @@ Rails.application.configure do
   open_timeout:         5,
   read_timeout:         5 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 560db6fb1cbd5e49d5b6b9b1a27d2715974bc812
+# <<<<<<< HEAD
+#
+# =======
+# >>>>>>> 560db6fb1cbd5e49d5b6b9b1a27d2715974bc812
 end
