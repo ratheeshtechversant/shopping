@@ -1,7 +1,8 @@
 
 <h3>Order Details</h3>
+<div class="table-responsive-sm">
   <table class="table">
-    <tr>
+    <tr class="table-primary">
       <th>item</th>
       <th>Weight</th>
       <th>quantity</th>
@@ -56,6 +57,7 @@
 
 
   </table>
+  </div>
   <% if @order.status == "cancelled"%>
   <p><%= link_to "back",orders_index_path ,class:"btn btn-primary"%></p>
   <% end %>
